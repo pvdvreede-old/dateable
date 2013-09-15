@@ -43,6 +43,18 @@ func (t *DateTest) TestIndexWithWeekend() {
 	t.AssertContains("\"Weekend\": true")
 }
 
+func (t *DateTest) TestIndexWithMonday() {
+	t.Get("/date/2013-09-16")
+	t.AssertOk()
+	t.AssertContains("\"Day\": \"Monday\"")
+}
+
+func (t *DateTest) TestIndexWithSaturday() {
+	t.Get("/date/2013-07-27")
+	t.AssertOk()
+	t.AssertContains("\"Day\": \"Saturday\"")
+}
+
 func (t *DateTest) TestBetweenContentType() {
 	t.Get("/date/between/2013-03-04/2013-05-06")
 	t.AssertOk()

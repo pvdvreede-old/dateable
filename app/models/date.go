@@ -5,6 +5,7 @@ import "time"
 type Date struct {
 	Date    string
 	Weekend bool
+	Day     string
 }
 
 func NewDate(dateStr string) Date {
@@ -16,6 +17,7 @@ func NewDateFromTime(time time.Time) Date {
 	date := Date{}
 	date.Date = time.Format("2006-01-02")
 	date.Weekend = isWeekend(time)
+	date.Day = time.Weekday().String()
 	return date
 }
 
