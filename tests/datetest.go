@@ -43,6 +43,21 @@ func (t *DateTest) TestIndexWithWeekend() {
 	t.AssertContains("\"Weekend\": true")
 }
 
+func (t *DateTest) TestIndexWithWeekNumber() {
+	t.Get("/date/2013-01-01")
+	t.AssertOk()
+	t.AssertContains("\"WeekNumber\": 1")
+	t.Get("/date/2013-12-28")
+	t.AssertOk()
+	t.AssertContains("\"WeekNumber\": 52")
+	t.Get("/date/2012-12-28")
+	t.AssertOk()
+	t.AssertContains("\"WeekNumber\": 52")
+	t.Get("/date/2013-06-20")
+	t.AssertOk()
+	t.AssertContains("\"WeekNumber\": 25")
+}
+
 func (t *DateTest) TestIndexWithMonday() {
 	t.Get("/date/2013-09-16")
 	t.AssertOk()
