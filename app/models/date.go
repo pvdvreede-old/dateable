@@ -3,9 +3,10 @@ package models
 import "time"
 
 type Date struct {
-	Date    string
-	Weekend bool
-	Day     string
+	Date       string
+	Weekend    bool
+	Day        string
+	WeekNumber int
 }
 
 func NewDate(dateStr string) Date {
@@ -18,6 +19,7 @@ func NewDateFromTime(time time.Time) Date {
 	date.Date = time.Format("2006-01-02")
 	date.Weekend = isWeekend(time)
 	date.Day = time.Weekday().String()
+	_, date.WeekNumber = time.ISOWeek()
 	return date
 }
 
