@@ -12,7 +12,4 @@ func (c Date) Index(dateParam string) revel.Result {
 	return c.RenderJson(date)
 }
 
-func (c Date) Between(from, to string) revel.Result {
-	dates := models.NewDates(from, to)
-	return c.RenderJson(dates)
-}
+

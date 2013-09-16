@@ -7,7 +7,7 @@ module:testrunner
 GET     /                                       App.Index
 
 GET     /date/:dateParam                        Date.Index
-GET     /date/between/:from/:to                 Date.Between
+GET     /dates/:from/:to                        Dates.Index
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
