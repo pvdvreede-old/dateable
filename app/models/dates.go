@@ -6,17 +6,27 @@ import (
 
 const dayInNano = time.Hour * 24
 
-type Dates []Date
+type Dates struct {
+	TotalDays int
+	Results   []Date
+}
+
+func (d *Dates) GetTotalDays() int {
+	return len(d.Results)
+}
 
 func NewDates(from, to string) Dates {
 	f := GetDate(from)
 	t := GetDate(to)
-	return GetDates(f, t)
+	var dates Dates
+	dates.Results = GetDates(f, t)
+	dates.TotalDays = dates.GetTotalDays()
+	return dates
 }
 
-func GetDates(from, to time.Time) Dates {
+func GetDates(from, to time.Time) []Date {
 	cont := true
-	var dates Dates
+	var dates []Date
 	incDate := from
 	for cont {
 		if incDate.After(to) {

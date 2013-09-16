@@ -42,6 +42,7 @@ func (t *DatesTest) TestIndexCorrectDates() {
 	for _, v := range toRun {
 		t.Get(fmt.Sprintf("/dates/%v/%v", v.From, v.To))
 		t.AssertOk()
-		t.AssertEqual(v.Length, len(t.GetDatesResponse()))
+		t.AssertEqual(v.Length, len(t.GetDatesResponse().Results))
+		t.AssertEqual(v.Length, t.GetDatesResponse().TotalDays)
 	}
 }
