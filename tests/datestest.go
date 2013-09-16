@@ -20,10 +20,11 @@ func (t *DatesTest) GetDatesResponse() models.Dates {
 }
 
 type DateRangeTest struct {
-	From     string
-	To       string
-	Length   int
-	Weekdays int
+	From        string
+	To          string
+	Length      int
+	Weekdays    int
+	WeekendDays int
 }
 
 func (t *DatesTest) TestIndexContentType() {
@@ -34,10 +35,10 @@ func (t *DatesTest) TestIndexContentType() {
 
 func (t *DatesTest) TestIndexCorrectDates() {
 	toRun := []DateRangeTest{
-		DateRangeTest{"2013-05-01", "2013-05-01", 1, 1},
-		DateRangeTest{"2013-05-01", "2013-05-02", 2, 2},
-		DateRangeTest{"2013-05-01", "2013-05-10", 10, 8},
-		DateRangeTest{"2013-05-01", "2013-06-02", 33, 23},
+		DateRangeTest{"2013-05-01", "2013-05-01", 1, 1, 0},
+		DateRangeTest{"2013-05-01", "2013-05-02", 2, 2, 0},
+		DateRangeTest{"2013-05-01", "2013-05-10", 10, 8, 2},
+		DateRangeTest{"2013-05-01", "2013-06-02", 33, 23, 10},
 	}
 
 	for _, v := range toRun {
@@ -46,5 +47,6 @@ func (t *DatesTest) TestIndexCorrectDates() {
 		t.AssertEqual(v.Length, len(t.GetDatesResponse().Results))
 		t.AssertEqual(v.Length, t.GetDatesResponse().TotalDays)
 		t.AssertEqual(v.Weekdays, t.GetDatesResponse().Weekdays)
+		t.AssertEqual(v.WeekendDays, t.GetDatesResponse().WeekendDays)
 	}
 }
