@@ -8,11 +8,19 @@ const dayInNano = time.Hour * 24
 
 type Dates struct {
 	TotalDays int
+	Weekdays  int
 	Results   []Date
 }
 
-func (d *Dates) GetTotalDays() int {
-	return len(d.Results)
+func (d *Dates) PopulateStats() {
+	weekdays := 0
+	for _, v := range d.Results {
+		if !v.Weekend {
+			weekdays++
+		}
+	}
+	d.TotalDays = len(d.Results)
+	d.Weekdays = weekdays
 }
 
 func NewDates(from, to string) Dates {
@@ -20,7 +28,7 @@ func NewDates(from, to string) Dates {
 	t := GetDate(to)
 	var dates Dates
 	dates.Results = GetDates(f, t)
-	dates.TotalDays = dates.GetTotalDays()
+	dates.PopulateStats()
 	return dates
 }
 
